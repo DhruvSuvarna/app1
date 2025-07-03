@@ -3,7 +3,7 @@ import 'package:go_router/go_router.dart';
 import 'layouts/app_layout.dart';
 import 'pages/home_page.dart';
 import 'pages/floor_map_page.dart';
-import 'maps/floor_map_controller.dart';
+import 'test/floor_map_controller.dart';
 import 'functions/algorithms/multi_floor_dijkstras_algo.dart';
 import 'maps/floor_painter_1.dart';
 import 'maps/floor_painter_2.dart';

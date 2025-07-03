@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import '../functions/algorithms/multi_floor_dijkstras_algo.dart';
-import 'floor_map_controller.dart';
+import '../test/floor_map_controller.dart';
 import 'floor_painter_1.dart';
 import 'floor_painter_2.dart';
 import 'floor_painter_3.dart';
@@ -70,9 +70,9 @@ class _NavigationDemoState extends State<NavigationDemo> {
           }
           
           // Update painters with new paths
-          _controller.addFloorPainter(1, FloorMapPainter1(shortestPath: _getFloorPath(path, 1)));
-          _controller.addFloorPainter(2, FloorMapPainter2(shortestPath: _getFloorPath(path, 2)));
-          _controller.addFloorPainter(3, FloorMapPainter3(shortestPath: _getFloorPath(path, 3)));
+          _controller.addFloorPainter(1, FloorMapPainter1(shortestPath: _getFloorPath(path, 1), isStart: start?[0] == '1' || (start?[0] == 'S' && start?[1] == '1')));
+          _controller.addFloorPainter(2, FloorMapPainter2(shortestPath: _getFloorPath(path, 2), isStart: start?[0] == '2' || (start?[0] == 'S' && start?[1] == '2')));
+          _controller.addFloorPainter(3, FloorMapPainter3(shortestPath: _getFloorPath(path, 3), isStart: start?[0] == '3' || (start?[0] == 'S' && start?[1] == '3')));
           
           print('navigated to Floor: $currentFloor');
           _controller.navigateToFloor(currentFloor);

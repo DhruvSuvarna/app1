@@ -8,7 +8,7 @@ class CameraManager {
 
   Future<void> initializeCamera() async {
     final cameras = await availableCameras();
-    controller = CameraController(cameras[1], ResolutionPreset.low);
+    controller = CameraController(cameras[0], ResolutionPreset.low);
     await controller!.initialize();
     
     controller!.startImageStream((image) {

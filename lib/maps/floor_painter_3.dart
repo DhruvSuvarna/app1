@@ -3,8 +3,32 @@ import 'dart:math' as math;
 
 class FloorMapPainter3 extends CustomPainter {
   final List<String> shortestPath;
+  final bool isStart;
   
-  FloorMapPainter3({required this.shortestPath});
+  FloorMapPainter3({required this.shortestPath, this.isStart = false});
+
+  void _drawCurrentLocation(Canvas canvas, Offset start, Offset end, Paint paint) {
+    final innerCirclePaint = Paint()
+      ..color = Colors.blue
+      ..style = PaintingStyle.fill;
+    final outerCirclePaint = Paint()
+      ..color = Colors.blue
+      ..style = PaintingStyle.stroke
+      ..strokeWidth = 3.0;
+    final outerCircle2Paint = Paint()
+      ..color = const Color.fromARGB(26, 46, 161, 255)
+      ..style = PaintingStyle.stroke
+      ..strokeWidth = 12.0;
+    //Draw the main line
+    canvas.drawLine(start, end, paint);
+    //Draw a circle at start point
+    canvas.drawCircle(start, 5, innerCirclePaint);
+    //Draw outer circle at start point
+    canvas.drawCircle(start, 10, outerCirclePaint);
+    //Draw outer circle at start point
+    canvas.drawCircle(start, 20, outerCircle2Paint);
+  }
+
 
   void _drawArrow(Canvas canvas, Offset start, Offset end, Paint paint) {
     // Compute direction vector
@@ -159,7 +183,11 @@ class FloorMapPainter3 extends CustomPainter {
       final Offset start = nodePositions[shortestPath[i]]!;
       final Offset end = nodePositions[shortestPath[i + 1]]!;
       
-      if (i == shortestPath.length - 2) {
+      if (i == 0) {
+        if(isStart) {
+        _drawCurrentLocation(canvas, start, end, pathPaint);
+        }
+      } else if (i == shortestPath.length - 2) {
         // This is the last segment, draw with arrow
         _drawArrow(canvas, start, end, pathPaint);
       } else {

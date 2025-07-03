@@ -3,8 +3,9 @@ import 'dart:math' as math;
 
 class FloorMapPainter1 extends CustomPainter {
   final List<String> shortestPath;
+  final bool isStart;
   
-  FloorMapPainter1({required this.shortestPath});
+  FloorMapPainter1({required this.shortestPath, this.isStart = false});
 
   void _drawCurrentLocation(Canvas canvas, Offset start, Offset end, Paint paint) {
     final innerCirclePaint = Paint()
@@ -182,7 +183,9 @@ class FloorMapPainter1 extends CustomPainter {
       final Offset end = nodePositions[shortestPath[i + 1]]!;
       
       if (i == 0) {
+        if(isStart) {
         _drawCurrentLocation(canvas, start, end, pathPaint);
+        }
       } else if (i == shortestPath.length - 2) {
         // This is the last segment, draw with arrow
         _drawArrow(canvas, start, end, pathPaint);
